@@ -401,3 +401,6 @@ FodyWeavers.xsd
 
 # MinHook
 !projects/psvr2_openvr_driver_ex/minhook/lib/*
+
+# UnifiedTelemetry stub DLLs copied into the app resources folder by the build
+projects/PSVR2Toolkit.App/Resources/*.dll

@@ -1,6 +1,7 @@
 #include "driver_host_proxy.h"
 
 #include "hmd_math.h"
+#include "tracked_device_proxy.h"
 #include "util.h"
 #include "vr_settings.h"
 
@@ -42,6 +43,11 @@ namespace psvr2_toolkit {
         VRSettings::GetBool(STEAMVR_SETTINGS_DISABLE_SENSE, SETTING_DISABLE_SENSE_DEFAULT_VALUE))
     {
       return false;
+    }
+
+    if (eDeviceClass == vr::TrackedDeviceClass_HMD) {
+      TrackedDeviceProxy *pTrackedDeviceProxy = new TrackedDeviceProxy(pDriver);
+      return m_pDriverHost->TrackedDeviceAdded(pchDeviceSerialNumber, eDeviceClass, pTrackedDeviceProxy);
     }
 
     return m_pDriverHost->TrackedDeviceAdded(pchDeviceSerialNumber, eDeviceClass, pDriver);

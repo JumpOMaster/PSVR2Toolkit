@@ -8,8 +8,13 @@
 > \
 > Sony, Sony Interactive Entertainment and PSVR2/PlayStation VR2 are trademarks or registered trademarks of Sony Interactive Entertainment LLC in the United States of America and elsewhere.
 
+> [!NOTE]
+> **This is a fork of [BnuuySolutions/PSVR2Toolkit](https://github.com/BnuuySolutions/PSVR2Toolkit) pinned to upstream tag `v0.2.1`.** All original credit for the base project goes to Bnuuy Solutions. This fork only adds:
+> - A custom render target resolution override for the headset (see [Custom headset resolution](#custom-headset-resolution))
+> - MinHook static libraries (`libMinHook.x64.lib`) recompiled so they link with the latest Visual Studio toolset (v145)
+
 <p align="center"><img src="https://github.com/BnuuySolutions/PSVR2Toolkit/blob/main/assets/Icon.png?raw=true" width="128" height="128"></p>
-<h1 align="center">PlayStation VR2 Toolkit</h1>
+<h1 align="center">PlayStation VR2 Toolkit (custom resolution fork)</h1>
 
 [![CC BY-NC-SA 4.0][cc-by-nc-sa-shield]][cc-by-nc-sa]
 
@@ -23,10 +28,23 @@ Unofficial modification for the official PlayStation VR2 driver/app.
 - Improved controller prediction
 - Improved controller haptics (w/ PCM haptics)
 - Adaptive triggers
+- Custom headset render target resolution (fork addition, see below)
 
 For developers, we also have our own API library, which allows you to take full advantage of these features.
 
 \* Eye tracking calibration is closed source and is not available to the public in source form, other than official PlayStation VR2 Toolkit releases.
+
+## Custom headset resolution
+This fork wraps the driver's `IVRDisplayComponent` and `ITrackedDeviceServerDriver` in proxies (`display_component_proxy.*` / `tracked_device_proxy.*`) so the render target size reported to SteamVR can be overridden. The resolution is hardcoded in `projects/psvr2_openvr_driver_ex/display_component_proxy.cpp:38`:
+
+```cpp
+void DisplayComponentProxy::GetRecommendedRenderTargetSize(uint32_t *pnWidth, uint32_t *pnHeight) {
+  *pnWidth = 3536;   // <--- change me
+  *pnHeight = 3368;  // <--- change me
+}
+```
+
+Edit those two values, rebuild the `psvr2_openvr_driver_ex` project (Release x64), and install the resulting DLL as described below. Everything else (window bounds, eye viewports, projection, distortion) is passed straight through to the original driver.
 
 ## Installation Guide
 1.) Open Steam, go to the PS VR2 app, click on the cog wheel, and go to "Manage -> Browse local files". (If you are using a copy of the PS VR2 app not installed by Steam, go to that instead.)

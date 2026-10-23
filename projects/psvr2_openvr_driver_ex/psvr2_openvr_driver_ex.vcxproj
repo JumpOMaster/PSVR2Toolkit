@@ -179,6 +179,7 @@
   <ItemGroup>
     <ClCompile Include="caesar_manager_hooks.cpp" />
     <ClCompile Include="device_provider_proxy.cpp" />
+    <ClCompile Include="display_component_proxy.cpp" />
     <ClCompile Include="driver_context_proxy.cpp" />
     <ClCompile Include="driver_host_proxy.cpp" />
     <ClCompile Include="eyelid_estimator.cpp" />
@@ -186,6 +187,7 @@
     <ClCompile Include="hmd_driver_factory.cpp" />
     <ClCompile Include="hmd_driver_loader.cpp" />
     <ClCompile Include="ipc_server.cpp" />
+    <ClCompile Include="tracked_device_proxy.cpp" />
     <ClCompile Include="usb_thread_gaze.cpp" />
     <ClCompile Include="usb_thread_hooks.cpp" />
     <ClCompile Include="trigger_effect_manager.cpp" />
@@ -194,6 +196,7 @@
     <ClInclude Include="caesar_manager_hooks.h" />
     <ClInclude Include="config.h" />
     <ClInclude Include="device_provider_proxy.h" />
+    <ClInclude Include="display_component_proxy.h" />
     <ClInclude Include="driver_context_proxy.h" />
     <ClInclude Include="eyelid_estimator.h" />
     <ClInclude Include="hmd2_gaze.h" />
@@ -202,6 +205,7 @@
     <ClInclude Include="hmd_device_hooks.h" />
     <ClInclude Include="hmd_driver_loader.h" />
     <ClInclude Include="ipc_server.h" />
+    <ClInclude Include="tracked_device_proxy.h" />
     <ClInclude Include="hmd_math.h" />
     <ClInclude Include="minhook\include\MinHook.h" />
     <ClInclude Include="pad_trigger_effect.h" />
